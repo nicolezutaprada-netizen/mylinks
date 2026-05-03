@@ -1,106 +1,619 @@
 /* =============================================
-   MYLINKS - ESTILOS BASE
-   En las próximas clases construirás encima
-   de estos estilos para mejorar el diseño.
+   MYLINKS v2 - ESTILOS
+   Paleta: Teal #00e5a0 + Violeta #7c3aed
+   Fuentes: Syne (títulos) + Space Mono (tech)
    ============================================= */
+
+
+/* --- VARIABLES DE COLOR --- */
+:root {
+    --color-fondo:      #060608;
+    --color-teal:       #00e5a0;
+    --color-violeta:    #7c3aed;
+    --color-texto:      #ffffff;
+    --color-texto-muted: rgba(255, 255, 255, 0.35);
+    --gradiente-dual:   linear-gradient(90deg, #00e5a0, #7c3aed);
+}
+
 
 /* --- ESTILOS GLOBALES --- */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  flex-direction:column;
-  font-family: 'Poppins', sans-serif;
-  font-size: 1rem;
-  line-height: 1.6;
-  background-color: #151520;
-  color: #ffffff;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
 }
 
-/* --- TARJETA PRINCIPAL --- */
-.card {
-  width: 90%;
-  max-width: 400px;
-  text-align: center;
-  padding: 2rem;
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+
+/* --- CANVAS MATRIX (fondo animado) --- */
+#canvas-matrix {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
 }
 
-/* --- FOTO DE PERFIL --- */
-.avatar {
-  border-radius: 50%;
+
+/* --- EFECTO SCANLINES (líneas de pantalla) --- */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.12) 2px,
+        rgba(0, 0, 0, 0.12) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
 }
 
-/* --- NOMBRE --- */
-.name {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+
+/* --- LUCES AMBIENTALES DE FONDO --- */
+body::before {
+    content: '';
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, transparent 70%);
+    bottom: -80px;
+    left: -80px;
+    pointer-events: none;
+    z-index: 0;
 }
 
-/* --- BIO --- */
-.bio {
-  font-size: 1rem;
-  color: #9999aa;
-  margin-bottom: 2rem;
-  text-align:center;
+
+/* --- PÁGINA PRINCIPAL (layout mobile: una columna) --- */
+.pagina {
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    max-width: 420px;
+    padding: 3rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
 }
 
-/* --- CONTENEDOR DE ENLACES --- */
-.links {
-  width: 100%;
+
+/* =============================================
+   COLUMNA IZQUIERDA - Identidad
+   ============================================= */
+
+.columna-izquierda {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
-/* --- CADA ENLACE --- */
-.link {
-  display: block;
-  width: 100%;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border: 1px solid #2a2a38;
-  color: #ffffff;
-  text-decoration: none;
-  text-align: center;
-  font-size: 1rem;
-  border-radius: 0.5rem;
- 
+
+/* --- ETIQUETA DEL SISTEMA --- */
+.etiqueta-sistema {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--color-teal);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
 }
 
-/* ========================================
-   RESPONSIVE: Tablets y Desktop (768px+)
-   ======================================== */
-@media (min-width: 768px) {
+.etiqueta-sistema::before {
+    content: '>';
+    color: var(--color-violeta);
+}
 
-    .card {
-        max-width: 500px;
+
+/* --- LÍNEA DE TERMINAL --- */
+.linea-terminal {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: rgba(124, 58, 237, 0.5);
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.05em;
+}
+
+.linea-terminal span {
+    color: rgba(124, 58, 237, 0.85);
+}
+
+
+/* --- NOMBRE CON EFECTO GLITCH --- */
+.nombre-glitch {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.2rem;
+
+    /* Gradiente en el texto */
+    background: var(--gradiente-dual);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    /* Necesario para los pseudo-elementos del glitch */
+    position: relative;
+    display: inline-block;
+}
+
+/* Capa superior del glitch (teal) */
+.nombre-glitch::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(90deg, var(--color-teal), var(--color-violeta));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    clip-path: polygon(0 15%, 100% 15%, 100% 38%, 0 38%);
+    animation: glitch-superior 4s infinite;
+}
+
+/* Capa inferior del glitch (violeta invertido) */
+.nombre-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(90deg, var(--color-violeta), var(--color-teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    clip-path: polygon(0 65%, 100% 65%, 100% 85%, 0 85%);
+    animation: glitch-inferior 4s infinite;
+}
+
+@keyframes glitch-superior {
+    0%, 88%, 100% { transform: translate(0); }
+    90%           { transform: translate(-4px, 1px); }
+    93%           { transform: translate(3px, -1px); }
+    96%           { transform: translate(-2px, 0); }
+}
+
+@keyframes glitch-inferior {
+    0%, 88%, 100% { transform: translate(0); }
+    91%           { transform: translate(4px, 1px); }
+    94%           { transform: translate(-3px, -1px); }
+    97%           { transform: translate(2px, 0); }
+}
+
+
+/* --- APELLIDO CON GRADIENTE --- */
+.apellido {
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.6rem;
+    background: var(--gradiente-dual);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+
+/* --- BIO EN FORMATO TERMINAL --- */
+.bio-terminal {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--color-texto-muted);
+    line-height: 2;
+    margin-bottom: 1.8rem;
+    list-style: none;
+    text-align: left;
+}
+
+.prompt-teal    { color: var(--color-teal); }
+.prompt-violeta { color: var(--color-violeta); }
+
+
+/* --- BOTÓN CTA --- */
+.boton-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.55rem 1.3rem;
+    border: none;
+    border-radius: 3px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--color-fondo);
+    text-decoration: none;
+    background: var(--gradiente-dual);
+    position: relative;
+    overflow: hidden;
+    transition: opacity 0.2s ease;
+}
+
+.boton-cta span {
+    position: relative;
+    z-index: 1;
+}
+
+.boton-cta:hover {
+    opacity: 0.85;
+}
+
+
+/* =============================================
+   COLUMNA DERECHA - Celular + Links flotantes
+   En mobile: los links se muestran como lista
+   ============================================= */
+
+.columna-derecha {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+
+/* --- CONTENEDOR DEL CELULAR (oculto en mobile) --- */
+.celular-contenedor {
+    display: none;
+}
+
+
+/* --- ENLACES EN MOBILE: lista simple --- */
+.enlace-flotante {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.7rem;
+    width: 100%;
+    padding: 0.75rem 1.1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.enlace-flotante::before {
+    content: './';
+    font-size: 0.65rem;
+    opacity: 0.5;
+}
+
+/* Color teal */
+.enlace-teal {
+    border: 1px solid rgba(0, 229, 160, 0.3);
+    color: var(--color-teal);
+    background: rgba(6, 6, 8, 0.88);
+}
+
+.enlace-teal .enlace-icono {
+    fill: var(--color-teal);
+}
+
+.enlace-teal:hover {
+    border-color: var(--color-teal);
+    box-shadow: 0 0 14px rgba(0, 229, 160, 0.35);
+    background: rgba(0, 229, 160, 0.07);
+    transform: scale(1.02);
+}
+
+/* Color violeta */
+.enlace-violeta {
+    border: 1px solid rgba(124, 58, 237, 0.35);
+    color: var(--color-violeta);
+    background: rgba(6, 6, 8, 0.88);
+}
+
+.enlace-violeta .enlace-icono {
+    fill: var(--color-violeta);
+}
+
+.enlace-violeta:hover {
+    border-color: var(--color-violeta);
+    box-shadow: 0 0 14px rgba(124, 58, 237, 0.4);
+    background: rgba(124, 58, 237, 0.08);
+    transform: scale(1.02);
+}
+
+/* --- ICONO SVG --- */
+.enlace-icono {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+}
+
+
+/* --- FLECHA ANIMADA (estilo uiverse) --- */
+
+/* Círculo contenedor de la flecha */
+.enlace-flecha-wrapper {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    position: relative;
+    margin-left: 0.4rem;
+}
+
+/* Color del círculo según variante */
+.enlace-teal .enlace-flecha-wrapper {
+    background-color: var(--color-teal);
+}
+
+.enlace-violeta .enlace-flecha-wrapper {
+    background-color: var(--color-violeta);
+}
+
+/* Icono de flecha */
+.enlace-flecha {
+    width: 12px;
+    height: 12px;
+    stroke: var(--color-fondo);
+    fill: none;
+    stroke-width: 2.5;
+}
+
+/* Segunda flecha (la copia que entra desde abajo-izquierda) */
+.enlace-flecha-copia {
+    position: absolute;
+    transform: translate(-150%, 150%);
+}
+
+/* Animación al hover: primera flecha sale, la copia entra */
+.enlace-flotante:hover .enlace-flecha:first-child {
+    transition: transform 0.3s ease-in-out;
+    transform: translate(150%, -150%);
+}
+
+.enlace-flotante:hover .enlace-flecha-copia {
+    transition: transform 0.3s ease-in-out 0.1s;
+    transform: translate(0);
+}
+
+
+/* =============================================
+   RESPONSIVE - Tablets (600px+)
+   ============================================= */
+@media (min-width: 600px) {
+
+    .pagina {
+        max-width: 520px;
     }
 
-    .name {
-        font-size: 2.5rem;
+    .nombre-glitch {
+        font-size: 3.8rem;
     }
 
-    .link {
-        transition: transform 0.2s ease;
-        margin-bottom: 1.25rem;
+    .apellido {
+        font-size: 1.2rem;
     }
 
-    .link:hover {
-        transform: scale(1.02);
+    .bio-terminal {
+        font-size: 0.7rem;
+    }
+}
+
+
+/* =============================================
+   RESPONSIVE - Desktop (900px+)
+   En desktop: layout de dos columnas con el
+   celular y los links flotantes alrededor
+   ============================================= */
+@media (min-width: 900px) {
+
+    /* Layout de dos columnas */
+    .pagina {
+        max-width: 1000px;
+        width: 90%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        padding: 4rem 2rem;
     }
 
-    .avatar {
-        width: 130px;
-        height: 130px;
+    .columna-izquierda {
+        align-items: flex-start;
+        text-align: left;
+        flex: 1;
+    }
+
+    .columna-derecha {
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* En desktop se muestra el celular con links flotantes */
+    .celular-contenedor {
+        display: block;
+        position: relative;
+        width: 178px;
+        height: 358px;
+    }
+
+    /* Los enlaces vuelven a ser flotantes (posición absoluta) */
+    .enlace-flotante {
+        position: absolute;
+        width: auto;
+    }
+
+    /* --- CELULAR --- */
+    .celular {
+        width: 100%;
+        height: 100%;
+        border-radius: 28px;
+        overflow: hidden;
+
+        /* Borde con gradiente usando border-box */
+        border: 1.5px solid transparent;
+        background:
+            linear-gradient(var(--color-fondo), var(--color-fondo)) padding-box,
+            linear-gradient(160deg, var(--color-teal), var(--color-violeta)) border-box;
+
+        box-shadow:
+            0 0 20px rgba(0, 229, 160, 0.25),
+            0 0 40px rgba(124, 58, 237, 0.2),
+            0 0 80px rgba(124, 58, 237, 0.06);
+    }
+
+    /* --- PANTALLA DEL CELULAR --- */
+    .celular-pantalla {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(160deg, #001a10 0%, #08060f 45%, #0e0618 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Glow interno de la pantalla */
+    .celular-pantalla::before {
+        content: '';
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(124, 58, 237, 0.18) 0%, transparent 65%);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* --- NOTCH DEL CELULAR --- */
+    .celular-notch {
+        position: absolute;
+        top: 9px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 36px;
+        height: 4px;
+        border-radius: 2px;
+        background: var(--gradiente-dual);
+        opacity: 0.4;
+        z-index: 1;
+    }
+
+    /* --- AVATAR / FOTO DE PERFIL --- */
+    .avatar-circulo {
+        width: 88px;
+        height: 88px;
+        border-radius: 50%;
+        border: 1.5px solid transparent;
+        background:
+            linear-gradient(#08060f, #08060f) padding-box,
+            linear-gradient(135deg, var(--color-teal), var(--color-violeta)) border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    .avatar-texto {
+        font-family: 'Space Mono', monospace;
+        font-size: 1.3rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--color-teal), var(--color-violeta));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    /* --- LÍNEAS CONECTORAS --- */
+    .linea-conector {
+        position: absolute;
+        height: 1px;
+        pointer-events: none;
+    }
+
+    .linea-teal    { background: rgba(0, 229, 160, 0.2); }
+    .linea-violeta { background: rgba(124, 58, 237, 0.25); }
+
+    .linea-superior-izq { width: 114px; top: 38px;    left: -114px; }
+    .linea-media-izq    { width: 118px; top: 126px;   left: -118px; }
+    .linea-media-der    { width: 108px; bottom: 126px; right: -108px; }
+    .linea-inferior-der { width: 118px; bottom: 38px;  right: -118px; }
+
+    /* --- PUNTOS EN LOS EXTREMOS --- */
+    .punto {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+    }
+
+    .punto-teal    { background: var(--color-teal);    box-shadow: 0 0 5px var(--color-teal); }
+    .punto-violeta { background: var(--color-violeta); box-shadow: 0 0 5px var(--color-violeta); }
+
+    .punto-sup-izq { top: 36px;     left: -116px; }
+    .punto-med-izq { top: 124px;    left: -120px; }
+    .punto-med-der { bottom: 124px; right: -110px; }
+    .punto-inf-der { bottom: 36px;  right: -120px; }
+
+    /* --- POSICIONES DE CADA ENLACE FLOTANTE --- */
+    .enlace-github   { top: 22px;     left: -114px; }
+    .enlace-linkedin { top: 110px;    left: -118px; }
+    .enlace-email    { bottom: 110px; right: -108px; }
+    .enlace-whatsapp { bottom: 22px;  right: -118px; }
+
+    /* Nombre más grande en desktop */
+    .nombre-glitch {
+        font-size: 3.8rem;
+    }
+
+    .bio-terminal {
+        font-size: 0.72rem;
+    }
+}
+
+
+/* =============================================
+   RESPONSIVE - Desktop grande (1200px+)
+   ============================================= */
+@media (min-width: 1200px) {
+
+    .pagina {
+        max-width: 1100px;
+    }
+
+    .nombre-glitch {
+        font-size: 4.5rem;
+    }
+
+    .apellido {
+        font-size: 1.5rem;
+    }
+
+    .bio-terminal {
+        font-size: 0.78rem;
     }
 }
