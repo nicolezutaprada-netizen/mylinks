@@ -279,7 +279,16 @@ body::before {
 }
 
 
-/* --- ENLACES EN MOBILE: lista simple --- */
+/* --- ENLACES MOBILE: visibles solo en móvil y tablet --- */
+.enlaces-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+
+/* --- ENLACES: estilos base compartidos --- */
 .enlace-flotante {
     display: flex;
     align-items: center;
@@ -450,12 +459,16 @@ body::before {
         justify-content: center;
     }
 
-    /* En desktop se muestra el celular con links flotantes */
+    /* En desktop se muestra el celular, se ocultan los enlaces mobile */
     .celular-contenedor {
         display: block;
         position: relative;
         width: 178px;
         height: 358px;
+    }
+
+    .enlaces-mobile {
+        display: none;
     }
 
     /* Los enlaces vuelven a ser flotantes (posición absoluta) */
