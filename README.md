@@ -1,37 +1,47 @@
-# MyLinks — Template
+# 🚀 Portfolio V2.0 – Nicole Zuta Prada
 
-Este es el proyecto base del **Módulo 2** del bootcamp Enter Tech School.
+Mi primer mini proyecto de portafolio personal desarrollado con HTML, CSS y JavaScript.
 
-## ¿Qué es MyLinks?
+Inspirado en una estética futurista/cyberpunk, este proyecto fue creado para practicar maquetación web, diseño responsive, efectos visuales y organización de una landing page moderna.
 
-Una página personal con tus enlaces importantes, similar a Linktree. Al terminar el módulo, esta página estará publicada en internet con GitHub Pages.
+## ✨ Características
 
----
+- Diseño estilo cyberpunk / terminal hacker.
+- Interfaz oscura con efectos neón.
+- Botón principal para acceder a mi GitHub.
+- Enlaces rápidos a:
+  - GitHub
+  - LinkedIn
+  - Email
+  - WhatsApp
+- Diseño responsive para diferentes dispositivos.
+- Animaciones y efectos visuales modernos.
 
-## 🚀 ¿Cómo personalizar este template?
+## 🛠️ Tecnologías utilizadas
 
-Abre `index.html` y cambia estos 4 elementos:
+- HTML5
+- CSS3
+- JavaScript
+- Flexbox
+- Grid Layout
 
-| Placeholder                     | Qué escribir        |
-| ------------------------------- | ------------------- |
-| `Tu Nombre`                     | Tu nombre real      |
-| `Una línea sobre ti...`         | Tu bio breve        |
-| `https://github.com/tu-usuario` | Tu perfil de GitHub |
-| `tu@email.com`                  | Tu email            |
+## 📷 Vista previa
 
-- Puedes colocar el .png o .jpg de tu foto en la misma carpeta del proyecto y cambiar el atributo src de la etiqueta img.
-- Abre `styles.css` y pon los colores propios que desees que tenga la pagina web.
+![Portfolio Preview](preview.png)
 
----
+## 🔗 Demo
 
-## 📁 Archivos del proyecto
+Al hacer clic en **"Ver Portafolio"**, el usuario es redirigido a mi perfil de GitHub donde puede explorar mis proyectos y repositorios.
 
-```
-mylinks/
-├── index.html   ← Estructura y contenido
-├── styles.css   ← Diseño y colores
-└── README.md    ← Este archivo
-```
+## 🎯 Objetivo del proyecto
 
----
+Este es uno de mis primeros proyectos web y forma parte de mi proceso de aprendizaje como estudiante de Ingeniería de Software.
+
+El objetivo fue practicar:
+
+- Estructuración de interfaces web.
+- Diseño visual moderno.
+- Responsive Design.
+- Organización de componentes.
+- Publicación de proyectos en GitHub.
 
