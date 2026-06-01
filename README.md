@@ -25,9 +25,6 @@ Inspirado en una estética futurista/cyberpunk, este proyecto fue creado para pr
 - Flexbox
 - Grid Layout
 
-## 📷 Vista previa
-
-![Portfolio Preview](preview.png)
 
 ## 🔗 Demo
 
